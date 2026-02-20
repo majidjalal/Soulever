@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+
+    --primary: 0 0% 7%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 40 4% 96%;
+    --secondary-foreground: 0 0% 7%;
+
+    --muted: 40 4% 96%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 40 52% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 40 10% 90%;
+    --input: 40 10% 90%;
+    --ring: 40 52% 55%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Custom luxury tokens */
+    --gold: 40 52% 55%;
+    --gold-light: 40 52% 70%;
+    --gold-dark: 40 52% 40%;
+    --dark-surface: 0 0% 7%;
+    --dark-surface-foreground: 0 0% 96%;
+    --section-padding: 6.25rem;
+    --section-padding-mobile: 3.75rem;
+    --content-max-width: 75rem;
+  }
+
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 40 52% 55%;
+    --accent-foreground: 0 0% 100%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 40 52% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply mx-auto w-full max-w-[75rem] px-5 md:px-8;
+  }
+
+  .section-padding {
+    @apply py-[3.75rem] md:py-[6.25rem];
+  }
+
+  .heading-display {
+    font-family: 'Playfair Display', serif;
+    @apply text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight;
+  }
+
+  .heading-section {
+    font-family: 'Playfair Display', serif;
+    @apply text-3xl md:text-4xl font-semibold leading-tight tracking-tight;
+  }
+
+  .text-body {
+    @apply text-base md:text-lg leading-relaxed text-muted-foreground;
+  }
+
+  .text-body-sm {
+    @apply text-sm md:text-base leading-relaxed text-muted-foreground;
+  }
+
+  .gold-gradient {
+    background: linear-gradient(135deg, hsl(40 52% 55%), hsl(40 52% 70%));
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-accent hover:text-foreground;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-transparent px-7 py-3.5 text-sm font-semibold text-foreground transition-all duration-300 hover:border-accent hover:text-accent;
+  }
+
+  .btn-hero {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-7 py-3.5 text-sm font-semibold transition-all duration-300;
+  }
+
+  .btn-hero-primary {
+    @apply btn-hero bg-white text-foreground hover:bg-accent hover:text-white;
+  }
+
+  .btn-hero-outline {
+    @apply btn-hero border border-white/40 text-white hover:border-white hover:bg-white/10;
+  }
+
+  .card-luxury {
+    @apply rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-accent/30;
+  }
+
+  .stat-card {
+    @apply flex flex-col items-start gap-3 rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:shadow-md hover:border-accent/30;
+  }
+}
