@@ -4,7 +4,9 @@ import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbyP_rv3l6ehKx_jB7TGzZJxzy0TW9NihK4_GBAfLQzeuCQkKmR9YXs6_caoW7kpM1mzBg/exec";
+  "https://script.google.com/macros/s/AKfycbzaquZNrP71CTKzRnMFFAST1UtKkqompxXo1JxDR-MT6-SJUy9ur62isRrOyK4JssGpQw/exec";
+
+const FORM_NAME = "Soulever Leads";
 
 const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -38,6 +40,7 @@ const ContactForm = () => {
         whatsapp: form.phone,
         cityCountry: form.cityCountry,
         pageUrl: typeof window !== "undefined" ? window.location.href : "",
+        formName: FORM_NAME,
       };
 
       try {
@@ -50,13 +53,40 @@ const ContactForm = () => {
         const result = await response.json();
         if (result.ok === false) throw new Error(result.error || "Submission failed");
       } catch {
-        // Fallback: no-cors POST (works when script blocks CORS; we can't verify success)
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
+        // Fallback: submit via hidden form + iframe to avoid CORS/no-cors body loss
+        if (typeof document !== "undefined") {
+          const iframeName = "google_script_iframe";
+          const iframe = document.createElement("iframe");
+          iframe.name = iframeName;
+          iframe.style.display = "none";
+          document.body.appendChild(iframe);
+
+          const formEl = document.createElement("form");
+          formEl.method = "POST";
+          formEl.action = GOOGLE_SCRIPT_URL;
+          formEl.target = iframeName;
+          formEl.style.display = "none";
+
+          Object.entries(payload).forEach(([k, v]) => {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = k;
+            input.value = v == null ? "" : String(v);
+            formEl.appendChild(input);
+          });
+
+          document.body.appendChild(formEl);
+          formEl.submit();
+
+          setTimeout(() => {
+            try {
+              document.body.removeChild(formEl);
+            } catch {}
+            try {
+              document.body.removeChild(iframe);
+            } catch {}
+          }, 2000);
+        }
       }
 
       setSubmitted(true);
@@ -124,6 +154,7 @@ const ContactForm = () => {
           onSubmit={handleSubmit}
           className="max-w-2xl mx-auto bg-card rounded-2xl border border-border p-6 md:p-10 shadow-sm"
         >
+          <input type="hidden" name="formName" value={FORM_NAME} />
           <div className="grid md:grid-cols-2 gap-5 mb-5">
             <div>
               <label htmlFor="name" className="block text-base font-medium mb-2">Name *</label>
