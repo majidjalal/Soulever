@@ -1,4 +1,4 @@
-import { ChevronDown, Phone } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import heroBg from "@/assets/hero-bg.jpg";
 
@@ -49,14 +49,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex justify-center"
         >
-          <a href="#contact" className="btn-hero-primary">
+          <a href="#contact" className="btn-hero-primary px-12 py-5 text-base md:text-lg">
             Register Interest
-          </a>
-          <a href="tel:+971000000000" className="btn-hero-outline">
-            <Phone size={16} />
-            Call Now
           </a>
         </motion.div>
       </div>

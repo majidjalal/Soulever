@@ -13,7 +13,7 @@ const MarketCTA = () => {
           viewport={{ once: true }}
           className="heading-display text-dark-surface-foreground max-w-3xl mx-auto mb-6"
         >
-          Secure Your Place in Dubai's Thriving Market
+          Secure Your Place at Soulever by Beyond
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -22,7 +22,7 @@ const MarketCTA = () => {
           transition={{ delay: 0.15 }}
           className="text-dark-surface-foreground/60 text-base md:text-lg max-w-xl mx-auto mb-10"
         >
-          With record-breaking demand and world-class infrastructure, now is the perfect time to invest in premium waterfront real estate.
+          An iconic waterfront opportunity designed for legacy living and strategic investment.
         </motion.p>
         <motion.a
           initial={{ opacity: 0, y: 20 }}

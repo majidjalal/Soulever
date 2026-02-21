@@ -1,46 +1,83 @@
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
-import { projects } from "@/data/content";
+
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyP_rv3l6ehKx_jB7TGzZJxzy0TW9NihK4_GBAfLQzeuCQkKmR9YXs6_caoW7kpM1mzBg/exec";
 
 const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const firedRef = useRef(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
-    project: "",
-    message: "",
+    cityCountry: "",
     consent: false,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setForm((p) => ({ ...p, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.consent) return;
 
-    // Fire "Lead" conversion event only once
-    if (!firedRef.current) {
-      firedRef.current = true;
-      // GA4 placeholder
-      if (typeof window !== "undefined" && (window as any).gtag) {
-        (window as any).gtag("event", "generate_lead", {
-          event_category: "form",
-          event_label: form.project || "general",
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const payload = {
+        name: form.name,
+        email: form.email,
+        whatsapp: form.phone,
+        cityCountry: form.cityCountry,
+        pageUrl: typeof window !== "undefined" ? window.location.href : "",
+      };
+
+      try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!response.ok) throw new Error("Submission failed");
+        const result = await response.json();
+        if (result.ok === false) throw new Error(result.error || "Submission failed");
+      } catch {
+        // Fallback: no-cors POST (works when script blocks CORS; we can't verify success)
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
         });
       }
-      // Meta Pixel placeholder
-      if (typeof window !== "undefined" && (window as any).fbq) {
-        (window as any).fbq("track", "Lead");
-      }
-    }
 
-    setSubmitted(true);
+      setSubmitted(true);
+
+      if (!firedRef.current) {
+        firedRef.current = true;
+        if (typeof window !== "undefined" && (window as any).gtag) {
+          (window as any).gtag("event", "generate_lead", {
+            event_category: "form",
+            event_label: form.cityCountry || "general",
+          });
+        }
+        if (typeof window !== "undefined" && (window as any).fbq) {
+          (window as any).fbq("track", "Lead");
+        }
+      }
+    } catch (err) {
+      setSubmitError("Something went wrong. Please try again or contact us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -75,7 +112,7 @@ const ContactForm = () => {
           <p className="text-gold text-sm font-semibold tracking-[0.15em] uppercase mb-4">Get In Touch</p>
           <h2 className="heading-section mb-4">Get Early Access</h2>
           <p className="text-body max-w-xl mx-auto">
-            Register your interest today and be the first to receive exclusive pricing, floor plans, and investment insights.
+            Register your interest today and receive exclusive pricing, floor plans, and investment insights.
           </p>
         </motion.div>
 
@@ -87,9 +124,9 @@ const ContactForm = () => {
           onSubmit={handleSubmit}
           className="max-w-2xl mx-auto bg-card rounded-2xl border border-border p-6 md:p-10 shadow-sm"
         >
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
+          <div className="grid md:grid-cols-2 gap-5 mb-5">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-1.5">Name *</label>
+              <label htmlFor="name" className="block text-base font-medium mb-2">Name *</label>
               <input
                 id="name"
                 name="name"
@@ -98,12 +135,12 @@ const ContactForm = () => {
                 maxLength={100}
                 value={form.name}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold transition"
+                className="w-full rounded-lg border border-input bg-background px-5 py-4 text-base outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold transition"
                 placeholder="Your full name"
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-1.5">Email *</label>
+              <label htmlFor="email" className="block text-base font-medium mb-2">Email *</label>
               <input
                 id="email"
                 name="email"
@@ -112,15 +149,15 @@ const ContactForm = () => {
                 maxLength={255}
                 value={form.email}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold transition"
+                className="w-full rounded-lg border border-input bg-background px-5 py-4 text-base outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold transition"
                 placeholder="you@example.com"
               />
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
+          <div className="grid md:grid-cols-2 gap-5 mb-6">
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium mb-1.5">Phone *</label>
+              <label htmlFor="phone" className="block text-base font-medium mb-2">WhatsApp Number *</label>
               <input
                 id="phone"
                 name="phone"
@@ -129,39 +166,23 @@ const ContactForm = () => {
                 maxLength={20}
                 value={form.phone}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold transition"
+                className="w-full rounded-lg border border-input bg-background px-5 py-4 text-base outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold transition"
                 placeholder="+971 50 000 0000"
               />
             </div>
             <div>
-              <label htmlFor="project" className="block text-sm font-medium mb-1.5">Interested Project</label>
-              <select
-                id="project"
-                name="project"
-                value={form.project}
+              <label htmlFor="cityCountry" className="block text-base font-medium mb-2">City/Country</label>
+              <input
+                id="cityCountry"
+                name="cityCountry"
+                type="text"
+                maxLength={100}
+                value={form.cityCountry}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold transition"
-              >
-                <option value="">Select a project</option>
-                {projects.map((p) => (
-                  <option key={p.slug} value={p.slug}>{p.name}</option>
-                ))}
-              </select>
+                className="w-full rounded-lg border border-input bg-background px-5 py-4 text-base outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold transition"
+                placeholder="e.g. Dubai, UAE"
+              />
             </div>
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="message" className="block text-sm font-medium mb-1.5">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              maxLength={1000}
-              value={form.message}
-              onChange={handleChange}
-              className="w-full rounded-lg border border-input bg-background px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold transition resize-none"
-              placeholder="Tell us about your investment goals..."
-            />
           </div>
 
           <label className="flex items-start gap-3 mb-6 cursor-pointer">
@@ -173,16 +194,20 @@ const ContactForm = () => {
             />
             <span className="text-xs text-muted-foreground leading-relaxed">
               I consent to SOULEVER by Beyond collecting my data to respond to my inquiry. View our{" "}
-              <a href="#" className="text-gold underline">Privacy Policy</a>.
+              <Link to="/privacy-policy" className="text-gold underline hover:no-underline">Privacy Policy</Link>.
             </span>
           </label>
 
+          {submitError && (
+            <p className="text-sm text-destructive mb-4">{submitError}</p>
+          )}
+
           <button
             type="submit"
-            disabled={!form.consent}
+            disabled={!form.consent || isSubmitting}
             className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Register Interest
+            {isSubmitting ? "Submitting..." : "Register Interest"}
           </button>
         </motion.form>
       </div>

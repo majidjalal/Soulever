@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="border-t border-border py-8">
@@ -9,9 +11,9 @@ const Footer = () => {
         <p className="text-xs text-muted-foreground text-center">
           © {new Date().getFullYear()} SOULEVER by Beyond. All rights reserved.
         </p>
-        <a href="#" className="text-xs text-muted-foreground hover:text-gold transition-colors">
+        <Link to="/privacy-policy" className="text-xs text-muted-foreground hover:text-gold transition-colors">
           Privacy Policy
-        </a>
+        </Link>
       </div>
     </footer>
   );

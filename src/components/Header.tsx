@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Map", href: "#map" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 
 const Header = () => {
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const baseHref = location.pathname === "/" ? "" : "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -30,17 +33,17 @@ const Header = () => {
     >
       <div className="section-container flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
-        <a href="#" className="font-display text-xl md:text-2xl font-bold tracking-tight">
+        <Link to="/" className="font-display text-xl md:text-2xl font-bold tracking-tight">
           <span className={scrolled ? "text-foreground" : "text-white"}>SOULEVER</span>
           <span className="text-gold"> by Beyond</span>
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={`${baseHref}${link.href}`}
               className={`text-sm font-medium transition-colors duration-300 hover:text-gold ${
                 scrolled ? "text-muted-foreground" : "text-white/80 hover:text-white"
               }`}
@@ -48,7 +51,7 @@ const Header = () => {
               {link.label}
             </a>
           ))}
-          <a href="#contact" className="btn-primary text-xs px-5 py-2.5">
+          <a href={`${baseHref}#contact`} className="btn-primary text-xs px-5 py-2.5">
             Get Early Access
           </a>
         </nav>
@@ -76,7 +79,7 @@ const Header = () => {
               {navLinks.map((link) => (
                 <a
                   key={link.href}
-                  href={link.href}
+                  href={`${baseHref}${link.href}`}
                   onClick={() => setMobileOpen(false)}
                   className="py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
@@ -84,7 +87,7 @@ const Header = () => {
                 </a>
               ))}
               <a
-                href="#contact"
+                href={`${baseHref}#contact`}
                 onClick={() => setMobileOpen(false)}
                 className="btn-primary text-center mt-2"
               >

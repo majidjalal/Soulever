@@ -12,9 +12,9 @@ const MapSection = () => {
           className="text-center mb-10"
         >
           <p className="text-gold text-sm font-semibold tracking-[0.15em] uppercase mb-4">Location</p>
-          <h2 className="heading-section mb-4">Prime Waterfront Addresses</h2>
+          <h2 className="heading-section mb-4">An Iconic Waterfront Setting at Dubai Maritime City</h2>
           <p className="text-body max-w-xl mx-auto">
-            Our developments are strategically positioned in the most coveted waterfront districts, offering unmatched connectivity and lifestyle.
+            Soulever by Beyond is strategically positioned within Dubai Maritime City — a prestigious coastal destination offering seamless connectivity to Downtown Dubai, DIFC, Port Rashid, and Jumeirah, while preserving the tranquility of true waterfront living.
           </p>
         </motion.div>
 
@@ -27,8 +27,8 @@ const MapSection = () => {
         >
           <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-secondary flex items-center justify-center">
             <iframe
-              title="Development Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115459.92834584776!2d55.12795565!3d25.0762677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2s!4v1700000000000"
+              title="Soulever by Beyond - Madinat Dubai Al Melaheyah"
+              src="https://www.google.com/maps?q=77G6%2BRMR+Madinat+Dubai+Al+Melaheyah+Dubai&output=embed"
               className="absolute inset-0 w-full h-full"
               style={{ border: 0 }}
               allowFullScreen

@@ -99,27 +99,27 @@ export const projects: Project[] = [
 
 export const faqItems = [
   {
-    question: "What is the minimum investment to get started?",
-    answer: "Our projects start from AED 850,000 for studio apartments, with luxury villas beginning at AED 5.2M. We offer flexible payment plans with as low as 10% down payment.",
+    question: "Why should investors consider Soulever by Beyond?",
+    answer: "Soulever by Beyond is positioned in Dubai Maritime City — a rapidly emerging waterfront district with limited premium supply. Its prime coastal location, strong end-user demand, and luxury positioning create strong potential for capital appreciation and attractive rental yields.",
   },
   {
-    question: "Are these properties freehold for foreign investors?",
-    answer: "Yes, all our developments are located in designated freehold zones, allowing full ownership rights for international investors with no restrictions.",
+    question: "What ROI potential does Soulever by Beyond offer?",
+    answer: "Dubai waterfront properties consistently outperform standard residential assets in both rental returns and long-term value growth. With increasing demand for premium lifestyle residences, Soulever presents strong prospects for both short-term rental income and long-term equity growth.",
   },
   {
-    question: "What payment plans are available?",
-    answer: "We offer a range of flexible payment plans including 60/40, 70/30, and post-handover options. Our advisors can tailor a plan that works best for your investment goals.",
+    question: "Is Dubai Maritime City a high-growth investment zone?",
+    answer: "Yes. Dubai Maritime City is undergoing major infrastructure and luxury development expansion, positioning it as one of Dubai's next prime waterfront hubs — similar to early-stage investments in Dubai Marina or Palm Jumeirah.",
   },
   {
-    question: "Can I earn rental income from my property?",
-    answer: "Absolutely. Our waterfront and downtown properties yield an average 7–9% ROI annually. We also offer full property management services for hassle-free rental income.",
+    question: "What payment plan is available for investors?",
+    answer: "Soulever by Beyond offers flexible post-handover-friendly payment structures, allowing investors to leverage capital efficiently while securing a high-demand waterfront asset.",
   },
   {
-    question: "What is the expected handover timeline?",
-    answer: "Handover timelines vary by project, ranging from Q1 2026 to Q3 2028. All our projects are delivered on schedule with a proven track record of timely completion.",
+    question: "Can international investors buy at Soulever by Beyond?",
+    answer: "Yes. Dubai Maritime City is a designated freehold zone, allowing both UAE residents and international investors to purchase property with full ownership rights.",
   },
   {
-    question: "Do you assist with visa and residency applications?",
-    answer: "Yes, properties valued above AED 750,000 qualify for a residency visa. Our concierge team handles the entire visa application process on your behalf.",
+    question: "What makes Soulever different from other waterfront projects?",
+    answer: "Soulever combines OMNIYAT's BEYOND design philosophy with limited waterfront inventory, premium architecture, and curated lifestyle amenities — creating a differentiated asset positioned for exclusivity and long-term value retention.",
   },
 ];

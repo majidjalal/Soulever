@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { Building2, MapPin, TrendingUp, Crown } from "lucide-react";
 
 const stats = [
-  { icon: Building2, title: "8M+ Sq Ft", description: "Total development area across premium locations" },
-  { icon: MapPin, title: "Prime Waterfront", description: "Exclusive beachfront and marina-side locations" },
-  { icon: TrendingUp, title: "Investor Friendly", description: "Flexible payment plans and high ROI potential" },
-  { icon: Crown, title: "Luxury Living", description: "World-class amenities and bespoke finishes" },
+  { icon: MapPin, title: "Distinctive Waterfront Locations", description: "Prime beachfront and marina-side positions with easy access to key urban hubs" },
+  { icon: Building2, title: "Design-Led Luxury", description: "Contemporary architecture and high-end finishes curated for timeless appeal" },
+  { icon: TrendingUp, title: "Smart Investment Potential", description: "Strong demand drivers, flexible payment options, and long-term value creation" },
+  { icon: Crown, title: "Lifestyle-First Living", description: "Resort-style amenities, panoramic views, and thoughtfully activated community spaces" },
 ];
 
 const fadeInUp = {
@@ -31,18 +31,15 @@ const About = () => {
             <motion.p variants={fadeInUp} custom={0} className="text-gold text-sm font-semibold tracking-[0.15em] uppercase mb-4">
               About SOULEVER
             </motion.p>
-            <motion.h2 variants={fadeInUp} custom={1} className="heading-section mb-6">
-              Building Legacies, Crafting Lifestyles
-            </motion.h2>
-            <motion.p variants={fadeInUp} custom={2} className="text-body mb-4">
-              SOULEVER by Beyond is a premier collection of design-led residences by OMNIYAT's BEYOND. With a portfolio spanning over 8 million square feet, we bring visionary architecture to life across the most sought-after waterfront addresses.
+            <motion.p variants={fadeInUp} custom={1} className="text-body mb-4">
+              SOULever by Beyond is a visionary waterfront residential brand from OMNIYAT's BEYOND portfolio, defining a new standard of modern luxury living in Dubai's most coveted coastal and marina districts. Rooted in bold design, impeccable quality, and thoughtful spatial planning, Soulever residences offer a lifestyle experience that balances serenity, sophistication, and cosmopolitan energy.
             </motion.p>
-            <motion.p variants={fadeInUp} custom={3} className="text-body mb-8">
-              Our commitment to excellence goes beyond design. Every SOULEVER residence is an investment in a lifestyle — where world-class amenities, breathtaking views, and meticulous craftsmanship converge.
+            <motion.p variants={fadeInUp} custom={2} className="text-body mb-8">
+              Driven by an ethos of architectural distinction and lifestyle enrichment, every Soulever address is conceived as a place to live beautifully and invest confidently. From meticulously crafted interiors to elevated amenity environments and premium waterfront settings, the brand brings enduring value, aesthetic refinement, and exceptional living experiences to homeowners and investors alike.
             </motion.p>
             <motion.a
               variants={fadeInUp}
-              custom={4}
+              custom={3}
               href="#contact"
               className="btn-primary"
             >
