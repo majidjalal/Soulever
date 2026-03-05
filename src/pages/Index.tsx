@@ -7,7 +7,6 @@ import MapSection from "@/components/MapSection";
 import ContactForm from "@/components/ContactForm";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   return (
@@ -23,7 +22,6 @@ const Index = () => {
         <FAQ />
       </main>
       <Footer />
-      <WhatsAppButton />
     </>
   );
 };
